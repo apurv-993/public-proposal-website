@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#2b1235" /><title>A Little Question 💜</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div><div id="petals" aria-hidden="true"></div>
+  <button id="musicButton" class="music-button" type="button" aria-pressed="false" title="Toggle romantic background music">♫ <span>Play music</span></button>
+  <main class="app-shell">
+    <section class="screen active" id="setupScreen">
+      <div class="eyebrow"><span class="sparkle">✦</span> A little digital love story <span class="sparkle">✦</span></div>
+      <h1>Make it <em>personal.</em></h1><p class="intro">Create a tiny moment they’ll remember. Tell their story, add your words, and choose the memories you want to share.</p>
+      <form id="setupForm" class="glass-card setup-card">
+        <div class="field-row"><label for="senderName">Your name</label><input id="senderName" maxlength="50" placeholder="e.g. Apurv" required /></div>
+        <div class="field-row"><label for="recipientName">Their name</label><input id="recipientName" maxlength="50" placeholder="e.g. Shrishti" required /></div>
+        <fieldset class="field-row relationship-field"><legend>Who are you proposing to?</legend><div class="choice-row">
+          <label class="choice"><input type="radio" name="recipientGender" value="her" checked><span>Her 💗</span></label><label class="choice"><input type="radio" name="recipientGender" value="him"><span>Him 💜</span></label><label class="choice"><input type="radio" name="recipientGender" value="them"><span>Them ✨</span></label>
+        </div></fieldset>
+        <div class="field-row"><label for="crushDescription">What do they mean to you?</label><textarea id="crushDescription" rows="4" maxlength="700" required placeholder="What do you admire about them? What changes when they're around? Share your story…"></textarea><small>This becomes the gentle build-up before the big question.</small></div>
+        <div class="field-row"><label for="proposalText">Your proposal message</label><textarea id="proposalText" rows="4" maxlength="700" required placeholder="Write the question and your own heartfelt words…"></textarea></div>
+        <div class="field-row"><label for="photoInput">Add photos <span class="optional">(up to 6)</span></label><input id="photoInput" type="file" accept="image/*" multiple />
+          <small>Select up to six photos at once. You can add a caption to each photo.</small><div id="photoPreview" class="photo-editor-list"></div></div>
+
+        <div class="field-row music-choice-field">
+          <label for="musicFileInput">Your background music <span class="optional">(optional)</span></label>
+          <input id="musicFileInput" type="file" accept="audio/*" />
+          <small>Choose an audio file up to 20 MB. It will be uploaded securely to the site’s storage for the shareable link.</small>
+          <div id="chosenMusicStatus" class="music-file-status">No custom song selected</div>
+          <label for="musicUrlInput">Or paste a public audio URL</label>
+          <input id="musicUrlInput" type="url" placeholder="https://example.com/your-song.mp3" />
+          <small>Use a direct link to an audio file that the recipient is allowed to access. Some music streaming links cannot be played directly on websites.</small>
+        </div>
+        <button class="primary-button full-button" type="submit">Create the moment <span>♡</span></button>
+        <p class="privacy-note">Your photos and music are uploaded to online storage, and your proposal details are saved so the same share link works on other devices.</p>
+      </form>
+    </section>
+
+    <section class="screen" id="buildUpScreen">
+      <div class="eyebrow"><span class="sparkle">✦</span> Before I ask you something… <span class="sparkle">✦</span></div>
+      <div class="soft-heart" aria-hidden="true">♡</div><p class="to-line" id="buildUpTo"></p>
+      <h1 class="build-title">There’s something <em>about you.</em></h1>
+      <article class="glass-card story-card"><p class="story-label">A FEW WORDS FROM THE HEART</p><p id="crushStory" class="story-text"></p><div class="story-divider">✧　♡　✧</div><p class="story-small">And there’s one thing I’ve been wanting to ask you…</p></article>
+      <div class="custom-song-player glass-card" id="customSongPlayer" hidden>
+        <div class="song-info">
+          <span class="song-icon" aria-hidden="true">♫</span>
+          <div>
+            <strong>Music chosen for you</strong>
+            <small id="songFileLabel">A song just for this moment</small>
+          </div>
+        </div>
+        <button id="customSongToggle" class="secondary-button" type="button" aria-pressed="false">Play song ▶</button>
+        <audio id="customSongAudio" loop preload="auto"></audio>
+      </div>
+      <button id="revealQuestionButton" class="primary-button reveal-button">I have a question for you <span>→</span></button>
+      <div class="share-box"><p>Want to send this moment as a link?</p><button type="button" id="copyLinkButton" class="secondary-button">Copy unique proposal link</button><p class="link-status" id="linkStatus" aria-live="polite"></p></div>
+    </section>
+
+    <section class="screen" id="proposalScreen">
+      <div class="eyebrow"><span class="sparkle">✦</span> Just one little question <span class="sparkle">✦</span></div><div class="ring" aria-hidden="true"><span>♡</span></div>
+      <p class="to-line" id="toLine"></p><h1 class="proposal-title" id="proposalTitle">I am already yours, will u be mine?</h1><p class="proposal-message" id="proposalMessage"></p><p class="subtle-line">…and the garden holds its breath</p>
+      <div class="answer-area"><button id="yesButton" class="yes-button">YES <span>💗</span></button><button id="noButton" class="no-button">No</button></div>
+      <p class="tiny-hint">Made with courage, a little hope, and lots of lilac.</p>
+    </section>
+
+    <section class="screen" id="yesScreen">
+      <div class="eyebrow"><span class="sparkle">✦</span> A new little chapter <span class="sparkle">✦</span></div><div class="celebration-heart">💞</div>
+      <h1 class="yes-heading" id="yesHeading">You said yes!</h1><p class="yes-subtitle" id="yesSubtitle">Some moments deserve to be kept forever.</p>
+      <div class="memory-card glass-card"><div class="memory-top"><p class="memory-kicker">A LITTLE PROMISE</p><h2 id="memoryTitle">Our story starts here</h2><p class="memory-names" id="memoryNames"></p></div>
+        <div id="memoryPhotos" class="memory-photos"></div><blockquote id="memoryQuote"></blockquote><p class="signature" id="signature"></p></div>
+      <form id="replyForm" class="glass-card reply-card"><label for="replyText">Send a little reply back 💌</label><textarea id="replyText" rows="3" maxlength="500" placeholder="Write your own reply…"></textarea>
+        <div class="reply-actions"><button type="submit" class="primary-button">Prepare reply <span>↗</span></button><button type="button" id="copyReplyButton" class="secondary-button">Copy message</button></div>
+        <p id="replyStatus" class="status-text" aria-live="polite"></p><p class="privacy-note">Nothing is sent automatically. Choose a share target or copy the message.</p></form>
+      <button id="startOverButton" class="text-button">Make another proposal ↺</button>
+    </section>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="script.js"></script>
+</body></html>
